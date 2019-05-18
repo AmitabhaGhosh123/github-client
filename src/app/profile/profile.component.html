@@ -1,0 +1,149 @@
+<div class="row">
+  <div class="col-12 flex-center m-3">
+    <app-searchbox></app-searchbox>
+  </div>
+</div>
+<hr>
+<div class="row mb-5">
+  <div class="col-md-4" *ngIf="profile">
+    <mdb-card class="testimonial-card  mt-2">
+      <div class="card-up aqua-gradient">
+      </div>
+      <div class="avatar mx-auto" *ngIf="profile">
+        <img [src]="profile.picture" class="rounded-circle" style="max-height: 9rem">
+      </div>
+      <mdb-card-body>
+        <mdb-card-title>
+          <h4 *ngIf="profile"> {{profile.name}} </h4>
+          <p class=" text-muted" *ngIf="user">( {{user.login}} )</p>
+          <p class="lead text-secondary" *ngIf="user">{{user.bio}}</p>
+        </mdb-card-title>
+        <hr>
+        <div *ngIf="user">
+          <p *ngIf="user.company !== null">
+            <i class="fa fa-building-o mr-2" aria-hidden="true"></i> Company : {{user.company}} </p>
+          <p *ngIf="user.blog !== null">
+            <i class="fa fa-internet-explorer mr-2" aria-hidden="true"></i>Blog : {{user.blog}} </p>
+          <p *ngIf="user.location !== null">
+            <i class="fa fa-globe mr-2" aria-hidden="true"></i> {{user.location}} </p>
+        </div>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+  <div class="col-md-6">
+    <div class="card mt-2">
+      <div class="py-5 px-4">
+        <div *ngIf="user">
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Public Repos
+              <span class="badge badge-dark badge-pill">{{user.public_repos}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Public Gists
+              <span class="badge badge-dark badge-pill">{{user.public_gists}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Followers
+              <span class="badge badge-dark badge-pill">{{user.followers}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Following
+              <span class="badge badge-dark badge-pill">{{user.following}}</span>
+            </li>
+          </ul>
+          <div class="my-2">
+            <p>Created At : {{user.created_at | date}}</p>
+            <p>Last Updated : {{user.updated_at | date}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Followers and Following -->
+<tabset [justified]="true" type="pills" *ngIf="user">
+  <tab heading="Followers" customClass="tab-style" *ngIf="user.followers !== 0">
+    <div class="py-3">
+      <ul>
+        <li class="chip animated fadeInLeft" *ngFor="let follower of followers">
+          <img [src]="follower.avatar_url" [alt]="follower.login">
+          <a [routerLink]="['../','search', follower.login]">{{follower.login}}</a>
+        </li>
+      </ul>
+    </div>
+  </tab>
+  <tab heading="Following" customClass="tab-style" *ngIf="user.following !== 0">
+    <div class="py-3">
+      <ul>
+        <li class="chip animated fadeInLeft" *ngFor="let follower of following">
+          <img [src]="follower.avatar_url" [alt]="follower.login">
+          <a [routerLink]="['../','search', follower.login]">{{follower.login}}</a>
+        </li>
+      </ul>
+    </div>
+  </tab>
+</tabset>
+<!--End Followers and following -->
+<br>
+<tabset [justified]="true" type="pills" *ngIf="user">
+  <tab heading="Repos" customClass="tab-style" *ngIf="user.public_repos !== 0">
+    <div class="row py-3 bg-transparent" *ngIf="repos">
+      <section class="col-md-6 my-2" *ngFor="let repo of repos">
+        <div class="card  hoverable animated flipInX">
+          <div class="card-body black-text">
+            <h4>
+              <a class=" text-capitalize" [href]="repo.html_url" target="_blank" rel="noopener">{{repo.name}}</a>
+            </h4>
+            <p class=" mb-0"> {{repo.description}} </p>
+            <div class="row pink-text">
+              <div class="col-6">
+                <i class="fa fa-code-fork mr-2" aria-hidden="true"></i>Forks : {{repo.forks}} </div>
+              <div class="col-6">
+                <i class="fa fa-eye mr-2" aria-hidden="true"></i>Watchers : {{repo.watchers}} </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr class=" dropdown-divider d-block">
+      <div class="flex-center">
+        <pagination pageBtnClass="pink" [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
+          [totalItems]="repoDemo.length" (pageChanged)="pageChanged($event)"></pagination>
+      </div>
+
+    </div>
+  </tab>
+  <tab heading="Gists" customClass="tab-style" *ngIf="user.public_gists !== 0">
+    <div class="row py-3 bg-transparent" *ngIf="gists">
+      <section class="col-md-6 my-2" *ngFor="let gist of gists">
+        <div class="card  hoverable animated flipInX">
+          <div class="card-body black-text">
+            <h4>
+              <a [href]="gist.html_url" target="_blank" rel="noopener">{{gist.description}}</a>
+            </h4>
+            <div class="row">
+              <div class="col-6">
+                Created At : {{gist.created_at | date}}
+              </div>
+              <div class="col-6">
+                Updated At : {{ gist.updated_at | date }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr class=" dropdown-divider d-block">
+      <div class="flex-center">
+        <pagination [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [totalItems]="gistTemp.length"
+          (pageChanged)="gistChanged($event)"></pagination>
+      </div>
+    </div>
+  </tab>
+</tabset>
+<hr>
+<div class="row" *ngIf="user">
+  <div class="col-12  mx-auto">
+    <h4 class="h4-responsive"> Contributions Chart</h4>
+    <img class="img-fluid d-block" [src]="contributionChart" [alt]="user.login">
+  </div>
+  </div>

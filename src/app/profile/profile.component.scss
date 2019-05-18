@@ -1,0 +1,124 @@
+.tab-style {
+    margin-right: 0.25em;
+    color: #fff;
+    background-color: #18bc9c;
+    border-color: #18bc9c;
+    &.active {
+      border-color: #18bc9c;
+      color: #18bc9c;
+      background-color: #fff;
+    }
+  }
+  
+  .testimonial-card .card-up {
+    overflow: hidden;
+    height: 120px;
+    -webkit-border-top-left-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    -webkit-border-top-right-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+  }
+  .testimonial-card .avatar {
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    width: 120px;
+    margin-top: -60px;
+    overflow: hidden;
+    border: 5px solid #fff;
+  }
+  .testimonial-card .avatar img {
+    width: 100%;
+  }
+  .testimonial-card .card-body {
+    text-align: center;
+  }
+  
+  .aqua-gradient {
+    background-image: radial-gradient(
+      circle farthest-corner at 12.3% 19.3%,
+      rgba(85, 88, 218, 1) 0%,
+      rgba(95, 209, 249, 1) 100.2%
+    );
+  }
+  .btn {
+    border-radius: 5rem;
+  }
+  .btn-grad {
+    background-image: linear-gradient(
+      to right,
+      #0099f7 0%,
+      #f11712 51%,
+      #0099f7 100%
+    );
+  }
+  .btn-grad:hover {
+    background-position: right center;
+  }
+  // ////////////////////////
+  .chip {
+    display: inline-block;
+    height: 32px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.6);
+    line-height: 32px;
+    padding: 0 12px;
+    -webkit-border-radius: 16px;
+    border-radius: 16px;
+    background-color: #eceff1;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    -webkit-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+  }
+  .chip:hover {
+    -webkit-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+    background-color: #e0e0e0;
+  }
+  .chip img {
+    float: left;
+    margin: 0 8px 0 -12px;
+    height: 32px;
+    width: 32px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+  }
+  .chip .close {
+    cursor: pointer;
+    float: right;
+    font-size: 16px;
+    line-height: 32px;
+    padding-left: 8px;
+    -webkit-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+  }
+  .chips {
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    margin-bottom: 30px;
+    min-height: 45px;
+    padding-bottom: 1rem;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .chips.focus {
+    border-bottom: 1px solid #4285f4;
+    -webkit-box-shadow: 0 1px 0 0 #4285f4;
+    box-shadow: 0 1px 0 0 #4285f4;
+  }
+  .chips:hover {
+    cursor: text;
+  }
+  .chips .tag.selected {
+    border-bottom: 1px solid #4285f4;
+    color: #fff;
+  }
