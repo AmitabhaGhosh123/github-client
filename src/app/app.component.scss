@@ -1,0 +1,25 @@
+.navbar-brand {
+  padding: 0;
+}
+.nav-link {
+  font-weight: 400;
+}
+footer a .fa {
+  font-size: 1.5rem;
+  transition: all 0.2s ease-in-out;
+  &.fa-facebook:hover {
+    color: #98553b;
+  }
+  &.fa-twitter:hover {
+    color: #cf1df2;
+  }
+  &.fa-google-plus:hover {
+    color: #dd3986;
+  }
+  &.fa-github:hover {
+    color: #4078c0;
+  }
+}
+.my-5 {
+  margin-top: 6rem !important;
+}
