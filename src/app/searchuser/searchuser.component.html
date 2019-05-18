@@ -1,0 +1,106 @@
+<div class="row">
+        <div class="col-12 flex-center m-3">
+          <app-searchbox></app-searchbox>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-4 my-2" *ngIf="userDetails">
+          <mdb-card cascade="true">
+            <div class="view view-cascade overlay waves-light" mdbWavesEffect>
+              <mdb-card-img [src]="userDetails.avatar_url"></mdb-card-img>
+              <a>
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <mdb-card-body cascade="true" class="text-center">
+              <h4 class="card-title animated flipInX">
+                <strong>{{ userDetails.name }}</strong>
+              </h4>
+              <h5> {{ userDetails.bio }} </h5>
+              <mdb-card-text>
+                <div class="animated slideInLeft" *ngIf="userDetails">
+                  <p *ngIf="userDetails.company !== null">
+                    <i class="fa fa-building-o mr-2" aria-hidden="true"></i> Company : {{userDetails.company}} </p>
+                  <p *ngIf="userDetails.blog !== null">
+                    <i class="fa fa-internet-explorer mr-2" aria-hidden="true"></i>Blog : {{userDetails.blog}} </p>
+                  <p *ngIf="userDetails.location !== null">
+                    <i class="fa fa-globe mr-2" aria-hidden="true"></i> {{userDetails.location}} </p>
+                </div>
+                <div class="row">
+                  <div class="col-6">Public Repos : {{ userDetails.public_repos }} </div>
+                  <div class="col-6">Public Gists : {{ userDetails.public_gists }} </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-6">Followers : {{ userDetails.followers }} </div>
+                  <div class="col-6">Following : {{ userDetails.following }} </div>
+                </div>
+              </mdb-card-text>
+            </mdb-card-body>
+          </mdb-card>
+        </div>
+        <div class="col-md-8 my-2" *ngIf="userDetails">
+          <tabset [justified]="true" type="pills">
+            <tab heading="Repos" customClass="tab-style" *ngIf="userDetails.public_repos !== 0">
+              <div class="row py-3 bg-transparent" *ngIf="userRepos">
+                <section class="col-md-6 my-2" *ngFor="let repo of userRepos">
+                  <div class="card  hoverable animated bounceInRight">
+                    <div class="card-body black-text">
+                      <h4>
+                        <a class=" text-capitalize" [href]="repo.html_url" target="_blank" rel="noopener">{{repo.name}}</a>
+                      </h4>
+                      <p class=" mb-0"> {{repo.description}} </p>
+                      <div class="row pink-text">
+                        <div class="col-6">
+                          <i class="fa fa-code-fork mr-2" aria-hidden="true"></i>Forks : {{repo.forks}} </div>
+                        <div class="col-6">
+                          <i class="fa fa-eye mr-2" aria-hidden="true"></i>Watchers : {{repo.watchers}} </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <hr class=" dropdown-divider d-block">
+                <div class="flex-center">
+                  <pagination pageBtnClass="pink" [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
+                    [totalItems]="repoDemo.length" [itemsPerPage]="5" (pageChanged)="pageChanged($event)"></pagination>
+                </div>
+      
+              </div>
+            </tab>
+            <tab heading="Gists" customClass="tab-style" *ngIf="userDetails.public_gists !== 0">
+              <div class="row py-3 bg-transparent" *ngIf="userGists">
+                <section class="col-md-6 my-2" *ngFor="let gist of userGists">
+                  <div class="card  hoverable animated bounceInRight">
+                    <div class="card-body black-text">
+                      <h4>
+                        <a [href]="gist.html_url" target="_blank" rel="noopener">{{gist.description}}</a>
+                      </h4>
+                      <div class="row">
+                        <div class="col-6">
+                          Created At : {{gist.created_at | date}}
+                        </div>
+                        <div class="col-6">
+                          Updated At : {{ gist.updated_at | date }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <hr class=" dropdown-divider d-block">
+                <div class="flex-center">
+                  <pagination [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [itemsPerPage]="5"
+                    [totalItems]="gistTemp.length" (pageChanged)="gistChanged($event)"></pagination>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+      <hr>
+      <div class="row" *ngIf="userDetails">
+        <div class="col-12  mx-auto">
+          <h4 class="h4-responsive"> Contributions Chart</h4>
+          <img class="img-fluid d-block" [src]="contributionChart" [alt]="userDetails.name">
+        </div>
+      </div>
