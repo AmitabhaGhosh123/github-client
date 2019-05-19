@@ -28,6 +28,7 @@ export class AuthService {
     public handleAuthentication(): void {
         this.auth0.parseHash((err,authResult) => {
             if(authResult && authResult.accessToken && authResult.idToken){
+                window.location.hash = '';
                 this.setSession(authResult);
                 this.router.navigate(['/profile']);
             }
@@ -71,8 +72,11 @@ export class AuthService {
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
-        // after logout redirect to home route
-        this.router.navigate(['/']);
+      
+        this.auth0.logout({
+            
+            returnTo: window.location.origin
+        });
     }
 
     public isAuthenticated(): boolean {
