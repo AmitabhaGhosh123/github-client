@@ -73,10 +73,7 @@ export class AuthService {
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
       
-        this.auth0.logout({
-            
-            returnTo: window.location.origin
-        });
+        this.router.navigate(['/']);
     }
 
     public isAuthenticated(): boolean {
