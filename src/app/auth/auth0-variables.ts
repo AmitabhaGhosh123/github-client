@@ -13,7 +13,7 @@ export const AUTH_CONFIG: AuthConfig = {
   CLIENT_ID: 'vNFpFacxs3hnGNGK4ScjLYqsNA7zhycv',
   CLIENT_DOMAIN: 'amitabha.auth0.com',
   AUDIENCE: 'https://amitabha.auth0.com/userinfo',
-  REDIRECT: 'http://gitty.gq/profile',
+  REDIRECT: 'http://localhost:4200/profile',
   SCOPE: 'openid profile'
 
 }
